@@ -39,7 +39,10 @@ get '/chat/:token' do
 end
 
 post '/chat_input/:token' do
-  key_id = Key.find_by_token(params[:token])
-  Chat.create(phrase: params[:phrase], user: session[:id], key: key_id)
-  erb :chat
+  key = Key.find_by_token(params[:token])
+  Chat.create(phrase: params[:phrase], user_id: session[:id], key_id: key.id)
+  redirect '/chat/'+ params[:token]
 end
+
+
+
