@@ -1,0 +1,27 @@
+<div class="container">
+  <h1>Here are your keys</h1>
+  <% array = [@qr1, @qr2, @qr3, @qr4, @qr5] %>
+  <form action="/key_attr" method="POST">
+  <div id="qr_array">
+  <% array.each do |qr|%>
+  <h2> Key </h2>
+  <table>
+<% qr.modules.each_index do |x| %>
+  <tr>
+  <% qr.modules.each_index do |y| %>
+   <% if qr.dark?(x,y) %>
+    <td class="black"/>
+   <% else %>
+    <td class="white"/>
+   <% end %>
+  <% end %>
+  </tr>
+<% end %>
+</table>
+<input type="text" name="key1" placeholder="Used for?"><br>
+<%end%>
+</div>
+
+  <input type="submit" value="Update Keys" class='cool-button'>
+</form>
+</div>

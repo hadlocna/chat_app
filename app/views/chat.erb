@@ -1,0 +1,20 @@
+<div class="container">
+  <h1>Welcome to the chat page!</h1>
+  <% key = Key.find_by_token(session[:token].to_s) %>
+  <% init_user = User.find(key.user) %>
+  <% if Chat.where(key_id: key.id).nil? %>
+  <% chats = Chat.find(key.id) %>
+  <% else %>
+  <%chats = Chat.create(user_id: session[:id], key_id: key.id) %>
+  <% chats.to_a %>
+  <% end %>
+ <p> Initiating User: <%=init_user.name%> </p>
+ <% chats.each do |chat| %>
+<p> User :<%= User.find(chat.user).name%> =<%= chat.phrase %> </p>
+ <%end%>
+
+<form action="/chat_input/<%=params[:token]" method="POST">
+  <input type="text" name="phrase" placeholder="Phrase"><br>
+  <input type="submit" value="Post" >
+</form>
+</div>
